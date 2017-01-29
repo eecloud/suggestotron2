@@ -4,7 +4,8 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.json
   def index
-    @topics = Topic.all.order('created_at DESC')
+    @topics = Topic.all
+
   end
 
   # GET /topics/1
