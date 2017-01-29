@@ -1,10 +1,10 @@
 class TopicsController < ApplicationController
-  before_action :set_topic, only: [:show, :edit, :update, :destroy, :upvote]
+  before_action :set_topic, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
 
   # GET /topics
   # GET /topics.json
   def index
-    @topics = Topic.all
+    @topics = Topic.all.order('created_at DESC')
   end
 
   # GET /topics/1
@@ -63,6 +63,11 @@ class TopicsController < ApplicationController
 
   def upvote
     @topic.votes.create
+    redirect_to(topics_path)
+  end
+
+  def downvote
+    @topic.votes.first.destroy
     redirect_to(topics_path)
   end
 
